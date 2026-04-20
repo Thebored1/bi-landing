@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model BusinessProfile {
+  id          String   @id @default(cuid())
+  userEmail   String
+  sourceUrl   String
+  name        String
+  industry    String?
+  location    String?
+  description String?
+  services    Json?
+  contactInfo Json?
+  rawResponse Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userEmail, createdAt(sort: Desc)])
+}

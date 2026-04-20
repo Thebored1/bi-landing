@@ -1,0 +1,17 @@
+.container {
+  width: min(90vw, 100%);
+  max-width: min(var(--layout-max, 1280px), max(var(--layout-min, 320px), var(--layout-fluid, 70vw)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Avoid the layout-min floor creating a ~320px column centered in the viewport
+   (huge side gutters) on typical phones. Use nearly full width + small insets. */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    max-width: min(var(--layout-max, 1280px), 100%);
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-right: max(14px, env(safe-area-inset-right, 0px));
+  }
+}

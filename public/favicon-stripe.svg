@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Stripe">
+  <!-- Square tile: blurple rounded-rect + white tilted bar -->
+  <rect x="1" y="1" width="30" height="30" rx="5" fill="#635BFF" stroke="#6b7280" stroke-width="0.65"/>
+  <path fill="#fff" d="M11.2 9.5 L18.2 8.1 L20.8 22.5 L13.8 23.9 Z"/>
+</svg>

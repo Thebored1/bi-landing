@@ -1,0 +1,40 @@
+{
+  "name": "bi-landing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clean": "node scripts/clean-next.mjs",
+    "dev": "npm run clean && next dev",
+    "dev:fast": "next dev",
+    "dev:turbo": "next dev --turbo",
+    "dev:webpack": "next dev",
+    "dev:clean": "npm run clean && next dev",
+    "dev:clean:webpack": "npm run clean && next dev",
+    "build": "next build",
+    "preview": "next build && next start",
+    "start": "next start",
+    "verify": "npm run build",
+    "env:sync-google": "node scripts/sync-google-env-from-json.mjs",
+    "env:nextauth-secret": "node -e \"console.log(require('crypto').randomBytes(32).toString('base64'))\""
+  },
+  "dependencies": {
+    "@google/genai": "^1.50.1",
+    "@prisma/adapter-better-sqlite3": "^7.7.0",
+    "@prisma/client": "^7.7.0",
+    "better-sqlite3": "^12.9.0",
+    "next": "14.2.35",
+    "next-auth": "^4.24.14",
+    "nextjs-toploader": "^3.9.17",
+    "prisma": "^7.7.0",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "typescript": "^5"
+  }
+}

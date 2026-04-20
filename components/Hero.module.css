@@ -1,0 +1,695 @@
+/* Local keyframes so Hero never depends on load order vs globals.css (Turbopack/Webpack dev splits). */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes heroScan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+@keyframes heroPulseDot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 0 56px;
+  overflow: hidden;
+  scroll-margin-top: 52px; /* fixed nav */
+}
+
+.hero > :last-child {
+  position: relative;
+  z-index: 2;
+}
+
+/* Dedicated backdrop stack — grid drift + glow + symbol matrix */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.backdropGlow {
+  position: absolute;
+  inset: -45%;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 78% 58% at 50% -12%,
+    rgba(200, 240, 74, 0.22) 0%,
+    rgba(200, 240, 74, 0.08) 40%,
+    transparent 72%
+  );
+  animation: heroGlowPulse 9s ease-in-out infinite alternate;
+}
+
+.backdropGrid {
+  position: absolute;
+  inset: -25%;
+  z-index: 1;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 0;
+  /* mask + transform often fails to animate in Chrome; background-position is reliable */
+  mask-image: radial-gradient(ellipse 88% 72% at 50% 6%, black 32%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 88% 72% at 50% 6%, black 32%, transparent 70%);
+  animation:
+    heroGridBgSlide 14s linear infinite,
+    heroGridBreath 5s ease-in-out infinite alternate;
+  will-change: background-position, opacity;
+}
+
+.symbolMatrix {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.symbolMatrix canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+@keyframes heroGridBgSlide {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+
+@keyframes heroGridBreath {
+  0% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes heroGlowPulse {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-7%, 10%) scale(1.18);
+    opacity: 1;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  animation: heroFadeUp 0.6s ease forwards 0.1s;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: heroPulseDot 2s ease infinite;
+}
+
+.headline {
+  font-family: var(--serif);
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 24px;
+  animation: heroFadeUp 0.6s ease forwards 0.2s;
+}
+
+.headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.description {
+  max-width: 52ch;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 40px;
+  animation: heroFadeUp 0.6s ease forwards 0.3s;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 64px;
+  animation: heroFadeUp 0.6s ease forwards 0.4s;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  background: var(--accent);
+  color: #0a0a08;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.primaryBtn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(200, 240, 74, 0.25);
+}
+
+.secondaryBtn {
+  padding: 13px 24px;
+  font-size: 15px;
+  color: var(--text-muted);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.secondaryBtn:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.16);
+}
+
+/* Demo card — fills the container width */
+.demoCard {
+  position: relative;
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  animation: heroFadeUp 0.7s ease forwards 0.5s;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 32px 80px rgba(0,0,0,0.5);
+}
+
+.demoBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg-3);
+}
+
+.demoDots {
+  display: flex;
+  gap: 6px;
+}
+
+.demoDots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+
+.demoUrl {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.demoInputWrap {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.demoInput {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.15s;
+}
+
+.demoInput:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.demoInput:focus-visible {
+  outline: 2px solid rgba(200, 240, 74, 0.35);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.demoInputField {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  font-family: var(--sans);
+  caret-color: #ccff33;
+}
+
+.demoInputField::placeholder {
+  color: var(--text-dim);
+}
+
+.demoInputField:focus {
+  outline: none;
+}
+
+.demoSearchBtn {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: #0a0a08;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.12s;
+}
+
+.demoSearchBtn:hover {
+  background: var(--accent-hover);
+}
+
+.demoSearchBtn:active {
+  transform: scale(0.98);
+}
+
+.demoInputText {
+  color: var(--text);
+  font-size: 15px;
+  text-shadow:
+    0.4px 0 0 rgba(255, 60, 120, 0.22),
+    -0.4px 0 0 rgba(60, 200, 255, 0.2);
+}
+
+/* Auto-loop: remount on index change — rise from below with a soft settle */
+@keyframes loopUrlIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.96);
+  }
+  58% {
+    opacity: 1;
+    transform: translate3d(0, -4px, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes loopPanelIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 42px, 0) scale(0.97);
+    filter: blur(5px);
+  }
+  45% {
+    opacity: 1;
+    filter: blur(1px);
+  }
+  72% {
+    transform: translate3d(0, -6px, 0) scale(1.008);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.loopUrlRoll {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  transform-origin: 50% 100%;
+  animation: loopUrlIn 0.48s cubic-bezier(0.25, 0.9, 0.32, 1) both;
+}
+
+.loopPanelRoll {
+  transform-origin: 50% 100%;
+  animation: loopPanelIn 0.68s cubic-bezier(0.22, 1, 0.28, 1) 0.08s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loopUrlRoll {
+    animation: loopUrlInReduced 0.38s ease-out both;
+  }
+
+  .loopPanelRoll {
+    animation: loopPanelInReduced 0.46s ease-out 0.04s both;
+  }
+}
+
+@keyframes loopUrlInReduced {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes loopPanelInReduced {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Caret: CSS-only blink. Delay until .demoCard heroFadeUp finishes (~1.2s) so parent opacity
+   doesn’t flatten the blink. */
+/* Looping demo caret — thin neon bar (editor-style), not the chunkier brand accent pill */
+.cursor {
+  display: block;
+  width: 1px;
+  min-width: 1px;
+  height: 16px;
+  margin-left: 2px;
+  align-self: center;
+  flex-shrink: 0;
+  border-radius: 0;
+  background-color: #ccff33;
+  box-shadow: 0 0 6px rgba(204, 255, 51, 0.45);
+  transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .demoInput .cursor {
+    animation: inputCaretBlink 1.05s linear infinite;
+    animation-delay: 1.25s;
+  }
+}
+
+@keyframes inputCaretBlink {
+  0%, 48% {
+    opacity: 1;
+  }
+  52%, 100% {
+    opacity: 0;
+  }
+}
+
+.demoResult {
+  padding: 16px;
+  min-height: 120px;
+}
+
+/* Looping demos: keep panel height stable so the hero + backdrop don’t reflow each tick */
+.demoCard[data-paused='false'] .demoResult {
+  min-height: 300px;
+}
+
+.demoPausedHint {
+  margin: 0;
+  padding: 24px 8px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.demoCard[data-paused='true'] .scanLine::after {
+  animation: none;
+  opacity: 0;
+}
+
+.demoCompany {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.demoLogoImg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.demoKnowledge {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.demoKnowledgeMain {
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.demoEntityName {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.demoEntityCategory {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.demoEntityBody {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.demoSourceLink {
+  display: inline;
+  margin-left: 2px;
+  font-weight: 500;
+  color: #6ab7ff;
+  text-decoration: none;
+}
+
+.demoSourceLink:hover {
+  text-decoration: underline;
+  color: #8bc9ff;
+}
+
+.demoVerified {
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(200, 240, 74, 0.15);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demoStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.demoStat {
+  background: var(--surface);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.demoStatVal {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.demoStatLabel {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.demoTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.demoTag {
+  padding: 4px 10px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.scanLine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scanLine::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(200,240,74,0.04), transparent);
+  animation: heroScan 4s ease-in-out infinite 1s;
+}
+
+.examples {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+  animation: heroFadeIn 0.6s ease forwards 0.8s;
+}
+
+.examplesLabel {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.exampleChip {
+  padding: 5px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.exampleChip:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.16);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 88px 0 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cta { flex-direction: column; width: 100%; }
+  .primaryBtn, .secondaryBtn { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Still show slow motion — ultra-slow reads as “broken” / static */
+  .backdropGrid {
+    animation-duration: 28s, 8s;
+  }
+
+  .backdropGlow {
+    animation-duration: 14s;
+  }
+}

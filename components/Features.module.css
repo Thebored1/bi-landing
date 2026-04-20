@@ -1,0 +1,834 @@
+/* Local ticker keyframes — do not rely on globals.css chunk ordering in dev. */
+@keyframes featuresTicker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.section {
+  padding: 0 0 100px;
+  overflow: hidden;
+}
+
+.ticker {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.tickerTrack {
+  display: flex;
+  animation: featuresTicker 40s linear infinite;
+  white-space: nowrap;
+}
+
+.tickerContent {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 28px;
+  font-size: 13px;
+  color: #555550;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tickerDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #555550;
+  background: var(--text-dim);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* —— Bento —— */
+.bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.card {
+  position: relative;
+  background: #111110;
+  background: var(--bg-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 22px 20px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-3);
+  transform: translateY(-2px);
+}
+
+.cardTop {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+
+.cardHeading {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.cardKicker {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+/* Stacked “windows” */
+.stackWindows {
+  position: relative;
+  height: 120px;
+  margin-top: 8px;
+}
+
+.stackWin {
+  position: absolute;
+  left: 50%;
+  width: 72%;
+  max-width: 200px;
+  height: 76px;
+  margin-left: -36%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(26, 26, 24, 0.92);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+.stackWin[data-layer='1'] {
+  top: 8px;
+  animation-name: stackFloat1;
+  animation-duration: 3.4s;
+  animation-delay: 0s;
+}
+
+.stackWin[data-layer='2'] {
+  top: 22px;
+  animation-name: stackFloat2;
+  animation-duration: 3.9s;
+  animation-delay: 0.2s;
+  z-index: 1;
+}
+
+.stackWin[data-layer='3'] {
+  top: 38px;
+  animation-name: stackFloat3;
+  animation-duration: 3.2s;
+  animation-delay: 0.35s;
+  z-index: 2;
+  border-color: rgba(200, 240, 74, 0.25);
+}
+
+.stackLabel {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+@keyframes stackFloat1 {
+  0% {
+    transform: translateX(-18%) translateY(0) rotate(-3deg) scale(1);
+    opacity: 0.82;
+  }
+  100% {
+    transform: translateX(-12%) translateY(-5px) rotate(0deg) scale(1.03);
+    opacity: 0.92;
+  }
+}
+
+@keyframes stackFloat2 {
+  0% {
+    transform: translateX(4%) translateY(0) rotate(1deg) scale(1);
+  }
+  100% {
+    transform: translateX(-2%) translateY(-4px) rotate(-2deg) scale(1.02);
+  }
+}
+
+@keyframes stackFloat3 {
+  0% {
+    transform: translateX(-8%) translateY(0) rotate(-1.5deg) scale(1);
+  }
+  100% {
+    transform: translateX(-14%) translateY(-6px) rotate(2deg) scale(1.04);
+  }
+}
+
+/* Stream / wireframe */
+.streamStage {
+  position: relative;
+  height: 118px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%),
+    repeating-linear-gradient(90deg, transparent, transparent 11px, rgba(255,255,255,0.04) 11px, rgba(255,255,255,0.04) 12px),
+    repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(255,255,255,0.04) 11px, rgba(255,255,255,0.04) 12px);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: streamStagePulse 5.5s ease-in-out infinite alternate;
+  box-shadow: inset 0 0 0 0 rgba(200, 240, 74, 0);
+}
+
+@keyframes streamStagePulse {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(200, 240, 74, 0);
+  }
+  100% {
+    box-shadow: inset 0 0 32px rgba(200, 240, 74, 0.06);
+  }
+}
+
+.streamChrome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.streamDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  opacity: 0.5;
+  animation: streamDotPulse 3.2s ease-in-out infinite;
+}
+
+.streamDot:nth-child(2) {
+  opacity: 0.35;
+  animation-delay: 0.25s;
+}
+
+.streamDot:nth-child(3) {
+  opacity: 0.5;
+  animation-delay: 0.5s;
+}
+
+@keyframes streamDotPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%      { opacity: 0.85; transform: scale(1.08); }
+}
+
+.streamUrlBar {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(200, 240, 74, 0.12), rgba(255, 255, 255, 0.04));
+  background-size: 200% 100%;
+  margin-left: 4px;
+  animation: streamUrlShimmer 4s ease-in-out infinite;
+}
+
+@keyframes streamUrlShimmer {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.streamGrid {
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: streamGridBob 3.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes streamGridBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+.streamBar {
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(200, 240, 74, 0.28);
+  transform-origin: left center;
+  width: 55%;
+  animation-name: streamBarPulse;
+  animation-duration: 2.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: calc(var(--n, 0) * 0.22s);
+  will-change: transform, opacity;
+}
+
+.streamBar:nth-child(2) { width: 78%; }
+.streamBar:nth-child(3) { width: 42%; }
+.streamBar:nth-child(4) { width: 90%; }
+.streamBar:nth-child(5) { width: 64%; }
+
+@keyframes streamBarPulse {
+  0% {
+    transform: scaleX(0.72);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.streamSweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(200, 240, 74, 0.06) 45%,
+    rgba(200, 240, 74, 0.12) 50%,
+    rgba(200, 240, 74, 0.06) 55%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: streamShimmer 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes streamShimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Graph */
+.graphSvg {
+  height: 110px;
+  margin-top: 4px;
+}
+
+.graphSvgInner {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.graphEdge {
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1.75;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  opacity: 0.45;
+  animation: graphEdgeLoop 4.2s ease-in-out infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.graphEdge + .graphEdge {
+  animation-delay: -1.4s;
+}
+
+@keyframes graphEdgeLoop {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0.35;
+  }
+  32% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  48% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  82% {
+    stroke-dashoffset: 100;
+    opacity: 0.35;
+  }
+  100% {
+    stroke-dashoffset: 100;
+    opacity: 0.35;
+  }
+}
+
+.graphPulse {
+  stroke: url(#edgeGrad);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  opacity: 0.35;
+  animation: graphSpineLoop 3.6s ease-in-out infinite;
+  animation-delay: -0.9s;
+  will-change: stroke-dashoffset, opacity;
+}
+
+@keyframes graphSpineLoop {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0.3;
+  }
+  28% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  44% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  78% {
+    stroke-dashoffset: 100;
+    opacity: 0.3;
+  }
+  100% {
+    stroke-dashoffset: 100;
+    opacity: 0.3;
+  }
+}
+
+.graphNode {
+  fill: var(--bg-3);
+  stroke: rgba(200, 240, 74, 0.5);
+  stroke-width: 1.5;
+  animation: nodeGlow 2.1s ease-in-out infinite;
+  will-change: filter;
+}
+
+.graphSvgInner > circle:nth-child(5) { animation-delay: 0s; }
+.graphSvgInner > circle:nth-child(6) { animation-delay: 0.25s; }
+.graphSvgInner > circle:nth-child(7) { animation-delay: 0.5s; }
+.graphSvgInner > circle:nth-child(8) { animation-delay: 0.75s; }
+
+@keyframes nodeGlow {
+  0%, 100% {
+    stroke: rgba(200, 240, 74, 0.4);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    stroke: rgba(200, 240, 74, 1);
+    filter: drop-shadow(0 0 12px rgba(200, 240, 74, 0.6));
+  }
+}
+
+/* Text tiles */
+.textCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  min-height: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+.textEyebrow {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.textTitle {
+  position: relative;
+  z-index: 1;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.textBody {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.textCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(200, 240, 74, 0.04) 50%,
+    transparent 60%
+  );
+  background-size: 220% 100%;
+  animation: textCardSheen 11s ease-in-out infinite;
+}
+
+@keyframes textCardSheen {
+  0%, 70% { opacity: 0; background-position: 100% 0; }
+  78%, 88% { opacity: 1; background-position: -80% 0; }
+  100% { opacity: 0; }
+}
+
+/* Spotlight */
+.spotlight {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.spotlight:hover {
+  transform: translateY(-2px);
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 8px rgba(200, 240, 74, 0.35);
+  animation: particleTwinkle 4s ease-in-out infinite;
+}
+
+.particle:nth-child(3n) {
+  background: rgba(200, 240, 74, 0.7);
+  width: 2px;
+  height: 2px;
+}
+
+.particle:nth-child(5n) {
+  animation-duration: 4.8s;
+}
+
+@keyframes particleTwinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.85) translate(0, 0); }
+  40%      { opacity: 1; transform: scale(1.15) translate(1px, -1px); }
+  70%      { opacity: 0.45; transform: scale(1) translate(-0.5px, 0.5px); }
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(ellipse 50% 45% at 70% 20%, rgba(200, 240, 74, 0.14), transparent 55%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200, 240, 74, 0.08), transparent 50%);
+  animation: spotlightDrift 22s ease-in-out infinite alternate;
+  transform: translate(0, 0) rotate(0deg);
+  pointer-events: none;
+}
+
+@keyframes spotlightDrift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-4%, 3%) rotate(4deg); }
+}
+
+.spotlightInner {
+  position: relative;
+  z-index: 1;
+  padding: 24px 22px 22px;
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 8, 0.5) 35%, rgba(10, 10, 8, 0.92) 100%);
+}
+
+.spotlightLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.spotlightTitle {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 28px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 10px;
+  max-width: 16ch;
+}
+
+.spotlightBody {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 28ch;
+}
+
+.spotlightCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-hover);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  animation: spotlightCtaIdle 4.5s ease-in-out infinite;
+}
+
+@keyframes spotlightCtaIdle {
+  0%, 100% { transform: translateX(0); box-shadow: 0 0 0 0 rgba(200, 240, 74, 0); }
+  50%      { transform: translateX(2px); box-shadow: 0 0 20px rgba(200, 240, 74, 0.08); }
+}
+
+.spotlightCta:hover {
+  animation: none;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0a08;
+  transform: translateX(3px);
+  box-shadow: none;
+}
+
+/* Wide stats strip */
+.wideCard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px 22px;
+  align-items: center;
+}
+
+.wideStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+  animation: wideStatRise 1.05s ease-out forwards;
+}
+
+.wideStat:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.wideStat:nth-child(2) {
+  animation-delay: 0.22s;
+}
+
+.wideStat:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes wideStatRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card:hover .wideStat {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.wideVal {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  animation: wideValGlow 5s ease-in-out infinite;
+}
+
+@keyframes wideValGlow {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50%      { text-shadow: 0 0 18px rgba(200, 240, 74, 0.12); }
+}
+
+.wideLbl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+@media (min-width: 769px) {
+  .bento {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(200px, auto) auto minmax(100px, auto);
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .vizProfile {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .vizStream {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .vizGraph {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .textCard:nth-of-type(4) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .textCard:nth-of-type(5) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .spotlight {
+    grid-column: 3;
+    grid-row: 2 / span 2;
+    min-height: 0;
+  }
+
+  .wideCard {
+    grid-column: 1 / 3;
+    grid-row: 3;
+  }
+
+  .vizProfile,
+  .vizStream,
+  .vizGraph {
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stackWindows {
+    flex: 1;
+    min-height: 120px;
+  }
+
+  .streamStage {
+    flex: 1;
+    min-height: 118px;
+  }
+
+  .graphSvg {
+    flex: 1;
+    min-height: 110px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-bottom: 72px;
+  }
+
+  .ticker {
+    margin-bottom: 56px;
+  }
+
+  .tickerItem {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .card {
+    padding: 16px 14px 14px;
+  }
+
+  .spotlightInner {
+    padding: 20px 14px 18px;
+  }
+
+  .wideCard {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 16px 14px;
+  }
+
+  .wideStat {
+    text-align: center;
+    padding: 10px 6px;
+  }
+}
+
+/* Only the long horizontal ticker is disabled for reduced motion — card / viz loops stay on. */
+@media (prefers-reduced-motion: reduce) {
+  .tickerTrack {
+    animation: none !important;
+  }
+}

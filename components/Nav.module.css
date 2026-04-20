@@ -1,0 +1,246 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 10, 8, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.shell {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+  margin: -4px -6px;
+  padding: 4px 6px;
+  transition: background 0.2s;
+}
+
+.logo:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.logoMark {
+  display: block;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login {
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.login:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+  background: hsla(0, 0%, 100%, 0.04);
+}
+
+.signup {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--accent);
+  color: #0a0a08;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.signup:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.authLoading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding-right: 4px;
+}
+
+.authLoadingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  opacity: 0.5;
+  animation: navPulse 1s ease-in-out infinite;
+}
+
+.authLoadingDot:last-child {
+  animation-delay: 0.2s;
+}
+
+@keyframes navPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.authUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0a0a08;
+  background: var(--accent);
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.dashboard:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.profileMenu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-3);
+  box-shadow: inset 0 0 0 1px var(--border-hover);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.avatarBtn:hover {
+  box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 1px rgba(200, 240, 74, 0.15);
+}
+
+.avatarBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.avatarBtn[aria-expanded='true'] {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarFallback {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1;
+}
+
+.profileDropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 140px;
+  padding: 4px;
+  border-radius: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  z-index: 200;
+}
+
+.profileLogout {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.profileLogout:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.profileLogout:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .login {
+    display: none;
+  }
+
+  .dashboard {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
