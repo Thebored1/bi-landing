@@ -10,7 +10,7 @@
     "dev:webpack": "next dev",
     "dev:clean": "npm run clean && next dev",
     "dev:clean:webpack": "npm run clean && next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "preview": "next build && next start",
     "start": "next start",
     "verify": "npm run build",
