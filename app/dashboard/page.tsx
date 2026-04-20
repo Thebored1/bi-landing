@@ -70,7 +70,7 @@ export default async function DashboardPage({
           initialProfiles={profiles.map((profile: (typeof profiles)[number]) => ({
             ...profile,
             services: Array.isArray(profile.services)
-              ? profile.services.filter((item): item is string => typeof item === 'string')
+              ? profile.services.filter((item: unknown): item is string => typeof item === 'string')
               : null,
             contactInfo:
               profile.contactInfo && typeof profile.contactInfo === 'object' && !Array.isArray(profile.contactInfo)
