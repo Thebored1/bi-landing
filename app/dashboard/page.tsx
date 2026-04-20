@@ -67,7 +67,7 @@ export default async function DashboardPage({
         </p>
         <DashboardWorkspace
           initialUrl={decoded}
-          initialProfiles={profiles.map((profile) => ({
+          initialProfiles={profiles.map((profile: (typeof profiles)[number]) => ({
             ...profile,
             services: Array.isArray(profile.services)
               ? profile.services.filter((item): item is string => typeof item === 'string')
