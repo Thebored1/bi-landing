@@ -1,6 +1,5 @@
 import { getAuthSession } from '@/lib/auth-session'
 import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
 type RequestProfile = {
@@ -104,8 +103,8 @@ export async function POST(req: Request) {
         location,
         description,
         services,
-        contactInfo: contactInfo as Prisma.InputJsonValue,
-        rawResponse: dynamicPayload as Prisma.InputJsonValue,
+        contactInfo: contactInfo as any,
+        rawResponse: dynamicPayload as any,
       },
     })
 
@@ -188,7 +187,7 @@ export async function PATCH(req: Request) {
   const updated = await prisma.businessProfile.update({
     where: { id: profileId },
     data: {
-      rawResponse: updatedRaw as Prisma.InputJsonValue,
+      rawResponse: updatedRaw as any,
     },
   })
 
